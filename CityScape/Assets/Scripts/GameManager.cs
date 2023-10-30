@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance = null; //½Ì±ÛÅæ µðÀÚÀÎ // ¿ÜºÎ¿¡¼­ GameManager¿¡ Á¢±ÙÇÒ¶§ ÀÌ°É ²ø¾î´Ù°¡ Á¢±Ù
+    public static GameManager instance = null; //ï¿½Ì±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ // ï¿½ÜºÎ¿ï¿½ï¿½ï¿½ GameManagerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½ ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½
     [SerializeField] private GameObject settingPanel;
     [SerializeField] private GameObject audioPanel;
 
