@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float speed;
+    public float health;
+    public bool isLive;
+
+    Rigidbody2D rigid;
+    SpriteRenderer spriter;
+
+    private void Awake()
     {
-        
+        rigid = GetComponent<Rigidbody2D>();
+        spriter = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate() // 물리적인 이동이 아니므로 fixedUpdate를 씀
     {
-        
+        rigid.MovePosition(transform.position + Vector3.left * speed * Time.deltaTime);
     }
+
 }
