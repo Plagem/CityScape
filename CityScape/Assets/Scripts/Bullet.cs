@@ -20,6 +20,7 @@ public class Bullet : MonoBehaviour
     }
 
     private void FixedUpdate()
+    {
         transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
     }
 }
