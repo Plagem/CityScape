@@ -10,9 +10,20 @@ public class Audio : MonoBehaviour
     [SerializeField] private Slider sliderMaster;
     [SerializeField] private Slider sliderBgm;
     [SerializeField] private Slider sliderSFX;
-
+    private static bool isAudio;
+    public static Audio instance = null;
     private void Awake()
     {
+        /*if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else 
+        {
+            Destroy(this);
+        }*/
+
         if(PlayerPrefs.HasKey("master"))
         {
             sliderMaster.value = PlayerPrefs.GetFloat("master");

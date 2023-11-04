@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject settingSound;
     [SerializeField] private GameObject creditPanel;
     [SerializeField] private GameObject pausePanel;
+    public string roadMainMenu = "MainMenu";
     void Awake()
     {
         if (instance == null)
@@ -61,6 +62,17 @@ public class GameManager : MonoBehaviour
 
     public void GoMenuButton()
     {
-        SceneManager.LoadScene("MainMenu");
+        StartCoroutine(LoadMyAsyncScene());    
+    }
+    IEnumerator LoadMyAsyncScene()
+    {
+        // AsyncOperation을 통해 Scene Load 정도를 알 수 있다.
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(roadMainMenu);
+
+        // Scene을 불러오는 것이 완료되면, AsyncOperation은 isDone 상태가 된다.
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
     }
 }
