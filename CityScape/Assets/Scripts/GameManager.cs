@@ -10,7 +10,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject settingSound;
     [SerializeField] private GameObject creditPanel;
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject creditPanelButton;
+    [SerializeField] private GameObject continueButton;
+    [SerializeField] private GameObject restartButton;
+    [SerializeField] private GameObject goToMenuButton;
+    [SerializeField] private GameObject offSettingPanelButton;
+    [SerializeField] private GameObject exitButton;
     public string roadMainMenu = "MainMenu";
+    public static bool isMenu = true;
+    public static bool isStage = false;
     void Awake()
     {
         if (instance == null)
@@ -23,29 +31,34 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void OnSettingSoundPanel()
+    private void OnEnable()
     {
-        settingSound.SetActive(true);
+        if (isMenu == true && isStage == false)
+        {
+            continueButton.SetActive(false);
+            restartButton.SetActive(false);
+            goToMenuButton.SetActive(false);
+            creditPanelButton.SetActive(true);
+            offSettingPanelButton.SetActive(true);
+            exitButton.SetActive(true);
+        }
+        else if (isMenu == false && isStage == true)
+        {
+            creditPanelButton.SetActive(false);
+            offSettingPanelButton.SetActive(false);
+            exitButton.SetActive(false);
+            continueButton.SetActive(true);
+            restartButton.SetActive(true);
+            goToMenuButton.SetActive(true);
+        }
     }
-
-    public void OffSettingSoundPanel()
-    {
-        settingSound.SetActive(false);
-    }
-
-    public void OnCreditPanel()
-    {
-        creditPanel.SetActive(true);
-    }
-
-    public void OffCreditPanel()
-    {
-        creditPanel.SetActive(false);
-    }
-    
     public void OnExitButton()
     {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 
     public void OnPausePanel()
@@ -73,6 +86,8 @@ public class GameManager : MonoBehaviour
         while (!asyncLoad.isDone)
         {
             yield return null;
+            isMenu = false;
+            isStage = true;
         }
     }
 }

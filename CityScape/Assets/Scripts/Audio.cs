@@ -7,31 +7,22 @@ using UnityEngine.UI;
 public class Audio : MonoBehaviour
 {
     [SerializeField] private AudioMixer audioMixer;
-    [SerializeField] private Slider sliderMaster;
     [SerializeField] private Slider sliderBgm;
     [SerializeField] private Slider sliderSFX;
-    private static bool isAudio;
     public static Audio instance = null;
     private void Awake()
     {
-        /*if(instance == null)
+        if(instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else 
         {
-            Destroy(this);
-        }*/
+            Destroy(gameObject);
+        }
 
-        if(PlayerPrefs.HasKey("master"))
-        {
-            sliderMaster.value = PlayerPrefs.GetFloat("master");
-        }
-        else
-        {
-            sliderMaster.value = 0.75f;
-        }
+        
 
         if (PlayerPrefs.HasKey("bgm"))
         {
@@ -53,16 +44,11 @@ public class Audio : MonoBehaviour
     }
     private void Start()
     { 
-        sliderMaster.onValueChanged.AddListener(SetMasterVolume);
         sliderBgm.onValueChanged.AddListener(SetBgmVolume);
         sliderSFX.onValueChanged.AddListener(SetSFXVolume);
     }
 
-    public void SetMasterVolume(float volume)
-    {
-        audioMixer.SetFloat("master", Mathf.Log10(volume) * 20);
-        PlayerPrefs.SetFloat("master", volume);
-    }
+    
     public void SetBgmVolume(float volume)
     {
         audioMixer.SetFloat("bgm", Mathf.Log10(volume) * 20);
